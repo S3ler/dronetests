@@ -4,7 +4,6 @@ name: default
 steps:
   - name: PrepareReports
     image: ubuntu
-    depends_on: [ clone ]
     volumes:
       - name: reports
         path: /var/local/dronetests/reports
