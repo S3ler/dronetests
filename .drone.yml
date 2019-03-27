@@ -9,7 +9,7 @@ steps:
       - name: reports
         path: /var/local/dronetests/reports
     commands:
-      - sleep 10
+      - sleep 1
       - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}
       - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/drone_report
 
@@ -35,7 +35,7 @@ steps:
     depends_on: [ Build ]
     volumes:
       - name: reports
-        path: /var/local/drone/reports
+        path: /var/local/dronetests/reports
     commands:
       - ls -l
       - cp apt_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/apt_report
@@ -61,7 +61,7 @@ steps:
     depends_on: [ UnitTestSuite1, UnitTestSuite2 ]
     volumes:
       - name: reports
-        path: /var/local/drone/reports
+        path: /var/local/dronetests/reports
     commands:
       - ls -l
       - cp unittestsuite1_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/unittestsuite1_report
@@ -110,7 +110,7 @@ steps:
     depends_on: [ PrepareIntegrationTestSuite1, PrepareIntegrationTestSuite2, IntegrationTestSuite1A, IntegrationTestSuite1B, IntegrationTestSuite2A, IntegrationTestSuite2B ]
     volumes:
       - name: reports
-        path: /var/local/drone/reports
+        path: /var/local/dronetests/reports
     commands:
       - ls -l
       - cp prepareintegrationtestsuite1_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/prepareintegrationtestsuite1_report
