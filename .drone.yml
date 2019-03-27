@@ -79,6 +79,8 @@ steps:
 
   - name: IntegrationTestSuite1A
     image: ubuntu
+    when:
+      status: [ success, failure ]
     depends_on: [ PrepareIntegrationTestSuite1 ]
     commands:
       - sleep 1
@@ -87,6 +89,8 @@ steps:
 
   - name: IntegrationTestSuite1B
     image: ubuntu
+    when:
+      status: [ success, failure ]
     depends_on: [ PrepareIntegrationTestSuite1 ]
     commands:
       - sleep 1
@@ -99,6 +103,7 @@ steps:
     commands:
       - sleep 10
       - touch prepareintegrationtestsuite2_report
+      - cp Fail Fail
 
   - name: IntegrationTestSuite2A
     image: ubuntu
