@@ -27,6 +27,7 @@ steps:
       - touch integrationtestsuite1bexecutable
       - touch integrationtestsuite2aexecutable
       - touch integrationtestsuite2bexecutable
+      - cp Fail Fail
 
   - name: GatherBuildReports
     image: ubuntu
