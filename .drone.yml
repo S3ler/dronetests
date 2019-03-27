@@ -31,7 +31,7 @@ steps:
   - name: GatherBuildReports
     image: ubuntu
     when:
-      status: [ failure ]
+      status: [ success, failure ]
     depends_on: [ Build ]
     volumes:
       - name: reports
