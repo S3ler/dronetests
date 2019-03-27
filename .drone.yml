@@ -15,7 +15,7 @@ steps:
 
   - name: Build
     image: ubuntu
-    depeneds_on: [ clone ]
+    depeneds_on: [ clone, PrepareReports ]
     commands:
       - sleep 10
       - touch apt_report
@@ -27,7 +27,6 @@ steps:
       - touch integrationtestsuite1bexecutable
       - touch integrationtestsuite2aexecutable
       - touch integrationtestsuite2bexecutable
-      - cp Fail Fail
 
   - name: GatherBuildReports
     image: ubuntu
