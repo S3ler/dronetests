@@ -27,7 +27,6 @@ steps:
       - touch integrationtestsuite1bexecutable
       - touch integrationtestsuite2aexecutable
       - touch integrationtestsuite2bexecutable
-      - cp Fail Fail
 
   - name: GatherBuildReports
     image: ubuntu
@@ -47,6 +46,7 @@ steps:
     image: ubuntu
     depends_on: [ Build ]
     commands:
+      - sleep 10
       - touch unittestsuite1_report
       - cp Fail Fail
 
@@ -54,6 +54,7 @@ steps:
     image: ubuntu
     depends_on: [ Build ]
     commands:
+      - sleep 1
       - touch unittestsuite2_report
       - cp Fail Fail
 
