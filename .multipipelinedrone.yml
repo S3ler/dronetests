@@ -30,6 +30,11 @@ steps:
       - touch integrationtestsuite1bexecutable
       - touch integrationtestsuite2aexecutable
       - touch integrationtestsuite2bexecutable
+      - ls -l
+      - ls -l /
+      - echo "${PWD}"
+      - ls -l /tmp
+      - ls -l /tmp/cache
       - cp integrationtestsuite1aexecutable /tmp/cache/integrationtestsuite1aexecutable
       - cp integrationtestsuite1bexecutable /tmp/cache/integrationtestsuite1bexecutable
       - cp integrationtestsuite2aexecutable /tmp/cache/integrationtestsuite2aexecutable
