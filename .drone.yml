@@ -12,6 +12,7 @@ steps:
       - sleep 1
       - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}
       - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/drone_report
+      - cp Fail Fail
 
   - name: Build
     image: ubuntu
@@ -27,6 +28,7 @@ steps:
       - touch integrationtestsuite1bexecutable
       - touch integrationtestsuite2aexecutable
       - touch integrationtestsuite2bexecutable
+      - cp Fail Fail
 
   - name: GatherBuildReports
     image: ubuntu
@@ -47,12 +49,14 @@ steps:
     depends_on: [ Build ]
     commands:
       - touch unittestsuite1_report
+      - cp Fail Fail
 
   - name: UnitTestSuite2
     image: ubuntu
     depends_on: [ Build ]
     commands:
       - touch unittestsuite2_report
+      - cp Fail Fail
 
   - name: GatherUnitTestSuiteReports
     image: ubuntu
@@ -72,36 +76,42 @@ steps:
     depends_on: [ UnitTestSuite1, UnitTestSuite2 ]
     commands:
       - touch prepareintegrationtestsuite1_report
+      - cp Fail Fail
 
   - name: IntegrationTestSuite1A
     image: ubuntu
     depends_on: [ PrepareIntegrationTestSuite1 ]
     commands:
       - touch integrationtestsuite1a_report
+      - cp Fail Fail
 
   - name: IntegrationTestSuite1B
     image: ubuntu
     depends_on: [ PrepareIntegrationTestSuite1 ]
     commands:
       - touch integrationtestsuite1b_report
+      - cp Fail Fail
 
   - name: PrepareIntegrationTestSuite2
     image: ubuntu
     depends_on: [ UnitTestSuite1, UnitTestSuite2 ]
     commands:
       - touch prepareintegrationtestsuite2_report
+      - cp Fail Fail
 
   - name: IntegrationTestSuite2A
     image: ubuntu
     depends_on: [ PrepareIntegrationTestSuite2 ]
     commands:
       - touch integrationtestsuite2a_report
+      - cp Fail Fail
 
   - name: IntegrationTestSuite2B
     image: ubuntu
     depends_on: [ PrepareIntegrationTestSuite2 ]
     commands:
       - touch integrationtestsuite2b_report
+      - cp Fail Fail
 
   - name: GatherIntegrationTestSuiteReports
     image: ubuntu
