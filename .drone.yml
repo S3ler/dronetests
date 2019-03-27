@@ -17,7 +17,7 @@ steps:
     image: ubuntu
     depends_on: [ PrepareReports ]
     commands:
-      - sleep 10
+      - sleep 1
       - touch apt_report
       - touch cmake_report
       - touch make_report
@@ -73,6 +73,7 @@ steps:
     image: ubuntu
     depends_on: [ UnitTestSuite1, UnitTestSuite2 ]
     commands:
+      - sleep 1
       - touch prepareintegrationtestsuite1_report
       - cp Fail Fail
 
@@ -117,6 +118,7 @@ steps:
       status: [ success, failure ]
     depends_on: [ PrepareIntegrationTestSuite1, PrepareIntegrationTestSuite2, IntegrationTestSuite1A, IntegrationTestSuite1B, IntegrationTestSuite2A, IntegrationTestSuite2B ]
     volumes:
+      - sleep 10
       - name: reports
         path: /var/local/dronetests/reports
     commands:
