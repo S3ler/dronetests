@@ -112,6 +112,7 @@ steps:
       - cp integrationtestsuite2a_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/integrationtestsuite2a_report
       - cp integrationtestsuite2b_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/integrationtestsuite2b_report
 
+
 volumes:
   - name: reports
     host:
