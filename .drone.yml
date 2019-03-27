@@ -65,7 +65,7 @@ steps:
     commands:
       - ls -l
       - cp unittestsuite1_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/unittestsuite1_report
-      - cp unittestsuite2 /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/unittestsuite2
+      - cp unittestsuite2_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/unittestsuite2_report
 
   - name: PrepareIntegrationTestSuite1
     image: ubuntu
