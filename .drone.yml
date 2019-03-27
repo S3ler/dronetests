@@ -21,7 +21,13 @@ steps:
       - touch apt_report
       - touch cmake_report
       - touch make_report
-
+      - touch unittestsuite1executable
+      - touch unittestsuite2executable
+      - touch integrationtestsuite1aexecutable
+      - touch integrationtestsuite1bexecutable
+      - touch integrationtestsuite2aexecutable
+      - touch integrationtestsuite2bexecutable
+      
   - name: GatherBuildReports
     image: ubuntu
     when:
@@ -40,12 +46,14 @@ steps:
     image: ubuntu
     depeneds_on: [ Build ]
     commands:
+      - cp unittestsuite1executable unittestsuite1executable_executed
       - touch unittestsuite1_report
       
   - name: UnitTestSuite2
     image: ubuntu
     depeneds_on: [ Build ]
     commands:
+      - cp unittestsuite2executable unittestsuite2executable_executed
       - touch unittestsuite2_report
       
   - name: GatherUnitTestSuiteReports
