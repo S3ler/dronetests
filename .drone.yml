@@ -32,9 +32,9 @@ steps:
 
   - name: GatherBuildReports
     image: ubuntu
+    depends_on: [ Build ]
     when:
       status: [ success, failure ]
-    depends_on: [ Build ]
     volumes:
       - name: reports
         path: /var/local/dronetests/reports
