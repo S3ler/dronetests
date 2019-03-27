@@ -30,10 +30,7 @@ steps:
       - touch integrationtestsuite1bexecutable
       - touch integrationtestsuite2aexecutable
       - touch integrationtestsuite2bexecutable
-      - cp integrationtestsuite1aexecutable /tmp/integrationtestsuite1aexecutable
-      - cp integrationtestsuite1bexecutable /tmp/integrationtestsuite1bexecutable
-      - cp integrationtestsuite2aexecutable /tmp/integrationtestsuite2aexecutable
-      - cp integrationtestsuite2bexecutable /tmp/integrationtestsuite2bexecutable
+
 
   - name: GatherBuildReports
     image: ubuntu
