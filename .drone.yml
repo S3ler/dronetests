@@ -16,8 +16,7 @@ steps:
 
   - name: Build
     image: ubuntu
-    depeneds_on:
-    - PrepareReports
+    depeneds_on: [ PrepareReports ]
     commands:
       - sleep 1
       - touch apt_report
