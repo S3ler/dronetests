@@ -44,14 +44,12 @@ steps:
 
   - name: UnitTestSuite1
     image: ubuntu
-    depeneds_on: [ Build ]
     commands:
       - cp unittestsuite1executable unittestsuite1executable_executed
       - touch unittestsuite1_report
       
   - name: UnitTestSuite2
     image: ubuntu
-    depeneds_on: [ Build ]
     commands:
       - cp unittestsuite2executable unittestsuite2executable_executed
       - touch unittestsuite2_report
