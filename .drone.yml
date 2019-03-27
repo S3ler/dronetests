@@ -56,7 +56,6 @@ steps:
     commands:
       - sleep 1
       - touch unittestsuite2_report
-      - cp Fail Fail
 
   - name: GatherUnitTestSuiteReports
     image: ubuntu
