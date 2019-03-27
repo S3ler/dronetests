@@ -11,10 +11,8 @@ steps:
       - sleep 10
       - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}
       - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/drone_report
-
   - name: Build
     image: ubuntu
-    depends_on: [ PrepareReports ]
     commands:
       - sleep 10
       - touch apt_report
@@ -26,7 +24,6 @@ steps:
       - touch integrationtestsuite1bexecutable
       - touch integrationtestsuite2aexecutable
       - touch integrationtestsuite2bexecutable
-      
   - name: GatherBuildReports
     image: ubuntu
     when:
@@ -40,19 +37,17 @@ steps:
       - cp apt_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/apt_report
       - cp cmake_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/cmake_report
       - cp make_report /var/local/dronetests/reports//${DRONE_REPO}/${DRONE_BUILD_NUMBER}/make_report
-
   - name: UnitTestSuite1
     image: ubuntu
     commands:
       - cp unittestsuite1executable unittestsuite1executable_executed
       - touch unittestsuite1_report
-      
   - name: UnitTestSuite2
     image: ubuntu
     commands:
       - cp unittestsuite2executable unittestsuite2executable_executed
       - touch unittestsuite2_report
-      
+
   - name: GatherUnitTestSuiteReports
     image: ubuntu
     when:
