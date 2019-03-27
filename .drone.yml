@@ -10,8 +10,8 @@ steps:
         path: /var/local/dronetests/reports
     commands:
       - sleep 1
-      - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}
-      - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/drone_report
+      - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}
+      - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/drone_report
 
   - name: Build
     image: ubuntu
@@ -38,9 +38,9 @@ steps:
         path: /var/local/dronetests/reports
     commands:
       - ls -l
-      - cp apt_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/apt_report
-      - cp cmake_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/cmake_report
-      - cp make_report /var/local/dronetests/reports//${DRONE_REPO}/${DRONE_BUILD_NUMBER}/make_report
+      - cp apt_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/apt_report
+      - cp cmake_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/cmake_report
+      - cp make_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/make_report
 
   - name: UnitTestSuite1
     image: ubuntu
@@ -66,8 +66,8 @@ steps:
         path: /var/local/dronetests/reports
     commands:
       - ls -l
-      - cp unittestsuite1_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/unittestsuite1_report
-      - cp unittestsuite2_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/unittestsuite2_report
+      - cp unittestsuite1_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/unittestsuite1_report
+      - cp unittestsuite2_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/unittestsuite2_report
 
   - name: PrepareIntegrationTestSuite1
     image: ubuntu
@@ -135,12 +135,12 @@ steps:
         path: /var/local/dronetests/reports
     commands:
       - ls -l
-      - cp prepareintegrationtestsuite1_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/prepareintegrationtestsuite1_report
-      - cp integrationtestsuite1a_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/integrationtestsuite1a_report
-      - cp integrationtestsuite1b_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/integrationtestsuite1b_report
-      - cp prepareintegrationtestsuite2_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/prepareintegrationtestsuite2_report
-      - cp integrationtestsuite2a_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/integrationtestsuite2a_report
-      - cp integrationtestsuite2b_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/integrationtestsuite2b_report
+      - cp prepareintegrationtestsuite1_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/prepareintegrationtestsuite1_report
+      - cp integrationtestsuite1a_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/integrationtestsuite1a_report
+      - cp integrationtestsuite1b_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/integrationtestsuite1b_report
+      - cp prepareintegrationtestsuite2_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/prepareintegrationtestsuite2_report
+      - cp integrationtestsuite2a_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/integrationtestsuite2a_report
+      - cp integrationtestsuite2b_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/integrationtestsuite2b_report
 
 
 volumes:
