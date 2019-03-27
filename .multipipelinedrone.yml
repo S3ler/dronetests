@@ -18,7 +18,7 @@ steps:
     depends_on: [ PrepareReports ]
     volumes:
       - name: cache
-        path: /tmp/cache
+        path: /tmp
     commands:
       - sleep 1
       - touch apt_report
@@ -30,10 +30,10 @@ steps:
       - touch integrationtestsuite1bexecutable
       - touch integrationtestsuite2aexecutable
       - touch integrationtestsuite2bexecutable
-      - cp integrationtestsuite1aexecutable /tmp/cache/integrationtestsuite1aexecutable
-      - cp integrationtestsuite1bexecutable /tmp/cache/integrationtestsuite1bexecutable
-      - cp integrationtestsuite2aexecutable /tmp/cache/integrationtestsuite2aexecutable
-      - cp integrationtestsuite2bexecutable /tmp/cache/integrationtestsuite2bexecutable
+      - cp integrationtestsuite1aexecutable /tmp/integrationtestsuite1aexecutable
+      - cp integrationtestsuite1bexecutable /tmp/integrationtestsuite1bexecutable
+      - cp integrationtestsuite2aexecutable /tmp/integrationtestsuite2aexecutable
+      - cp integrationtestsuite2bexecutable /tmp/integrationtestsuite2bexecutable
 
   - name: GatherBuildReports
     image: ubuntu
@@ -83,7 +83,7 @@ steps:
     depends_on: [ UnitTestSuite1, UnitTestSuite2 ]
     volumes:
       - name: cache
-        path: /tmp/cache
+        path: /tmp
     commands:
       - sleep 10
       - touch prepareintegrationtestsuite1_report
@@ -110,6 +110,9 @@ steps:
   - name: PrepareIntegrationTestSuite2
     image: ubuntu
     depends_on: [ UnitTestSuite1, UnitTestSuite2 ]
+    volumes:
+      - name: cache
+        path: /tmp
     commands:
       - sleep 1
       - cp integrationtestsuite2aexecutable integrationtestsuite2aexecutable_executed
