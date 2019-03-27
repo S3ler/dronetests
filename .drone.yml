@@ -45,14 +45,12 @@ steps:
     image: ubuntu
     depends_on: [ GatherBuildReports ]
     commands:
-      - cp unittestsuite1executable unittestsuite1executable_executed
       - touch unittestsuite1_report
 
   - name: UnitTestSuite2
     image: ubuntu
     depends_on: [ GatherBuildReports ]
     commands:
-      - cp unittestsuite2executable unittestsuite2executable_executed
       - touch unittestsuite2_report
 
   - name: GatherUnitTestSuiteReports
