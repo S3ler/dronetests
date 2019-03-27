@@ -50,6 +50,7 @@ steps:
       - cp integrationtestsuite1bexecutable /tmp/integrationtestsuite1bexecutable
       - cp integrationtestsuite2aexecutable /tmp/integrationtestsuite2aexecutable
       - cp integrationtestsuite2bexecutable /tmp/integrationtestsuite2bexecutable
+      - ls -l /tmp
 
   - name: GatherBuildReports
     image: ubuntu
@@ -92,9 +93,11 @@ steps:
         path: /tmp
     commands:
       - sleep 1
+      - ls -l /tmp
       - cp /tmp/unittestsuite1executable unittestsuite1executable
       - cp /tmp/unittestsuite2executable unittestsuite2executable
       - touch prepareunittestsuites_report
+      - ls -l
       
   - name: UnitTestSuite1
     image: ubuntu
