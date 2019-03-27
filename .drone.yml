@@ -4,6 +4,7 @@ name: default
 steps:
   - name: PrepareReports
     image: ubuntu
+    depeneds_on: [ clone ]
     volumes:
       - name: reports
         path: /var/local/dronetests/reports
@@ -14,6 +15,7 @@ steps:
 
   - name: Build
     image: ubuntu
+    depeneds_on: [ clone ]
     commands:
       - sleep 10
       - touch apt_report
@@ -40,21 +42,6 @@ steps:
       - cp cmake_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/cmake_report
       - cp make_report /var/local/dronetests/reports//${DRONE_REPO}/${DRONE_BUILD_NUMBER}/make_report
 
-  - name: Build2
-    image: ubuntu
-    depends_on: [ clone ]
-    commands:
-      - sleep 10
-      - touch apt_report
-      - touch cmake_report
-      - touch make_report
-      - touch unittestsuite1executable
-      - touch unittestsuite2executable
-      - touch integrationtestsuite1aexecutable
-      - touch integrationtestsuite1bexecutable
-      - touch integrationtestsuite2aexecutable
-      - touch integrationtestsuite2bexecutable
-
   - name: UnitTestSuite1
     image: ubuntu
     depends_on: [ Build ]
@@ -63,7 +50,7 @@ steps:
 
   - name: UnitTestSuite2
     image: ubuntu
-    depends_on: [ Build2 ]
+    depends_on: [ Build ]
     commands:
       - touch unittestsuite2_report
 
