@@ -79,8 +79,6 @@ steps:
 
   - name: IntegrationTestSuite1A
     image: ubuntu
-    when:
-      status: [ success ]
     depends_on: [ PrepareIntegrationTestSuite1 ]
     commands:
       - sleep 1
@@ -99,13 +97,11 @@ steps:
     image: ubuntu
     depends_on: [ UnitTestSuite1, UnitTestSuite2 ]
     commands:
-      - sleep 10
+      - sleep 4
       - touch prepareintegrationtestsuite2_report
 
   - name: IntegrationTestSuite2A
     image: ubuntu
-    when:
-      status: [ success ]
     depends_on: [ PrepareIntegrationTestSuite2 ]
     commands:
       - sleep 1
