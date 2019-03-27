@@ -16,9 +16,6 @@ steps:
   - name: Build
     image: ubuntu
     depends_on: [ PrepareReports ]
-    volumes:
-      - name: cache
-        path: /tmp
     commands:
       - sleep 1
       - touch apt_report
