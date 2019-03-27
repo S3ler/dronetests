@@ -10,16 +10,15 @@ steps:
         path: /var/local/dronetests/reports
     commands:
       - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}
-      - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}\n
-        DRONE_BUILD_STARTED ${DRONE_BUILD_STARTED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/config
+      - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/drone_report
 
   - name: Build
     image: ubuntu
+    depends_on: [ PrepareReports ]
     commands:
       - touch apt_report
       - touch cmake_report
       - touch make_report
-      - cp fail fail
 
   - name: GatherBuildReports
     image: ubuntu
