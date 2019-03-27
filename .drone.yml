@@ -46,9 +46,8 @@ steps:
     image: ubuntu
     depends_on: [ Build ]
     commands:
-      - sleep 10
+      - sleep 1
       - touch unittestsuite1_report
-      - cp Fail Fail
 
   - name: UnitTestSuite2
     image: ubuntu
