@@ -105,7 +105,7 @@ steps:
   - name: IntegrationTestSuite2A
     image: ubuntu
     when:
-      status: [ success, failure ]
+      status: [ success ]
     depends_on: [ PrepareIntegrationTestSuite2 ]
     commands:
       - sleep 1
