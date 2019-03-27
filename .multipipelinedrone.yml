@@ -155,5 +155,4 @@ volumes:
     host:
       path: /var/local/dronetests/reports
   - name: cache
-    host:
-      path: {}
+    tmp: {}
