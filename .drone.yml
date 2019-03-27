@@ -2,9 +2,20 @@ kind: pipeline
 name: default
 
 steps:
+  - name: PrepareReports
+    image: ubuntu
+    depends_on: [ clone ]
+    volumes:
+      - name: reports
+        path: /var/local/dronetests/reports
+    commands:
+      - sleep 10
+      - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}
+      - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/drone_report
+
   - name: Build
     image: ubuntu
-    depeneds_on: [ PrepareReports ]
+    depends_on: [ PrepareReports ]
     commands:
       - sleep 1
       - touch apt_report
@@ -21,7 +32,7 @@ steps:
     image: ubuntu
     when:
       status: [ failure ]
-    depeneds_on: [ Build ]
+    depends_on: [ Build ]
     volumes:
       - name: reports
         path: /var/local/drone/reports
@@ -47,7 +58,7 @@ steps:
     image: ubuntu
     when:
       status: [ failure ]
-    depeneds_on: [ UnitTestSuite1, UnitTestSuite2 ]
+    depends_on: [ UnitTestSuite1, UnitTestSuite2 ]
     volumes:
       - name: reports
         path: /var/local/drone/reports
@@ -96,7 +107,7 @@ steps:
     image: ubuntu
     when:
       status: [ failure ]
-    depeneds_on: [ PrepareIntegrationTestSuite1, PrepareIntegrationTestSuite2, IntegrationTestSuite1A, IntegrationTestSuite1B, IntegrationTestSuite2A, IntegrationTestSuite2B ]
+    depends_on: [ PrepareIntegrationTestSuite1, PrepareIntegrationTestSuite2, IntegrationTestSuite1A, IntegrationTestSuite1B, IntegrationTestSuite2A, IntegrationTestSuite2B ]
     volumes:
       - name: reports
         path: /var/local/drone/reports
