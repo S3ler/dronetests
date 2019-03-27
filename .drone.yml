@@ -73,14 +73,14 @@ steps:
     image: ubuntu
     depends_on: [ UnitTestSuite1, UnitTestSuite2 ]
     commands:
-      - sleep 10
+      - sleep 1
       - touch prepareintegrationtestsuite1_report
-      - cp Fail Fail
 
   - name: IntegrationTestSuite1A
     image: ubuntu
     depends_on: [ PrepareIntegrationTestSuite1 ]
     commands:
+      - sleep 1
       - touch integrationtestsuite1a_report
       - cp Fail Fail
 
@@ -88,6 +88,7 @@ steps:
     image: ubuntu
     depends_on: [ PrepareIntegrationTestSuite1 ]
     commands:
+      - sleep 1
       - touch integrationtestsuite1b_report
       - cp Fail Fail
 
@@ -103,6 +104,7 @@ steps:
     image: ubuntu
     depends_on: [ PrepareIntegrationTestSuite2 ]
     commands:
+      - sleep 1
       - touch integrationtestsuite2a_report
       - cp Fail Fail
 
@@ -110,6 +112,7 @@ steps:
     image: ubuntu
     depends_on: [ PrepareIntegrationTestSuite2 ]
     commands:
+      - sleep 1
       - touch integrationtestsuite2b_report
       - cp Fail Fail
 
