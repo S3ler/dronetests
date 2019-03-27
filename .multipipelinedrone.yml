@@ -96,7 +96,7 @@ steps:
       - cp /tmp/unittestsuite2executable unittestsuite2executable
       - touch prepareunittestsuites_report
       
-  - name: UnitTestSuite1a
+  - name: UnitTestSuite1
     image: ubuntu
     depends_on: [ PrepareUnitTestSuites ]
     commands:
