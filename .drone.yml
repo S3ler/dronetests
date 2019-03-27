@@ -14,7 +14,6 @@ steps:
 
   - name: Build
     image: ubuntu
-    depends_on: [ PrepareReports ]
     commands:
       - sleep 10
       - touch apt_report
@@ -58,7 +57,7 @@ steps:
 
   - name: UnitTestSuite1
     image: ubuntu
-    depends_on: [ Build2 ]
+    depends_on: [ Build ]
     commands:
       - touch unittestsuite1_report
 
