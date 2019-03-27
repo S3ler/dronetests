@@ -57,7 +57,7 @@ steps:
   - name: GatherUnitTestSuiteReports
     image: ubuntu
     when:
-      status: [ failure ]
+      status: [ success, failure ]
     depends_on: [ UnitTestSuite1, UnitTestSuite2 ]
     volumes:
       - name: reports
@@ -106,7 +106,7 @@ steps:
   - name: GatherIntegrationTestSuiteReports
     image: ubuntu
     when:
-      status: [ failure ]
+      status: [ success, failure ]
     depends_on: [ PrepareIntegrationTestSuite1, PrepareIntegrationTestSuite2, IntegrationTestSuite1A, IntegrationTestSuite1B, IntegrationTestSuite2A, IntegrationTestSuite2B ]
     volumes:
       - name: reports
