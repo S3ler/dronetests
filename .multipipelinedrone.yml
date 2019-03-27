@@ -79,3 +79,64 @@ trigger:
 
 depends_on:
 - amd64_prepare
+---
+kind: pipeline
+name: amd64_unittest
+
+steps:
+  - name: PrepareUnitTestSuites
+    image: ubuntu
+    depends_on: [ clone ]
+    volumes:
+      - name: cache
+        path: /tmp
+    commands:
+      - sleep 1
+      - cp /tmp/unittestsuite1executable unittestsuite1executable
+      - cp /tmp/unittestsuite2executable unittestsuite2executable
+      - touch prepareunittestsuites_report
+      
+  - name: UnitTestSuite1a
+    image: ubuntu
+    depends_on: [ PrepareUnitTestSuites ]
+    commands:
+      - sleep 1
+      - cp unittestsuite1executable unittestsuite1executable_executed
+      - touch unittestsuite1_report
+
+  - name: UnitTestSuite2
+    image: ubuntu
+    depends_on: [ PrepareUnitTestSuites ]
+    commands:
+      - sleep 1
+      - cp unittestsuite2executable unittestsuite2executable_executed
+      - touch unittestsuite2_report
+
+  - name: GatherUnitTestSuiteReports
+    image: ubuntu
+    when:
+      status: [ success, failure ]
+    depends_on: [ PrepareUnitTestSuites, UnitTestSuite1, UnitTestSuite2 ]
+    volumes:
+      - name: reports
+        path: /var/local/dronetests/reports
+    commands:
+      - ls -l
+      - cp prepareunittestsuites_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/prepareunittestsuites_report
+      - cp unittestsuite1_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/unittestsuite1_report
+      - cp unittestsuite2_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/unittestsuite2_report
+
+volumes:
+- name: cache
+  tmp: {}
+volumes:
+  - name: reports
+    host:
+      path: /var/local/dronetests/reports
+
+trigger:
+  status:
+  - success
+
+depends_on:
+- amd64_build
