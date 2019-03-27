@@ -76,11 +76,12 @@ steps:
     commands:
       - sleep 1
       - touch prepareintegrationtestsuite1_report
+      - cp Fail Fail
 
   - name: IntegrationTestSuite1A
     image: ubuntu
     when:
-      status: [ success, failure ]
+      status: [ success ]
     depends_on: [ PrepareIntegrationTestSuite1 ]
     commands:
       - sleep 1
@@ -111,7 +112,7 @@ steps:
     commands:
       - sleep 1
       - touch integrationtestsuite2a_report
-      - cp Fail Fail
+
 
   - name: IntegrationTestSuite2B
     image: ubuntu
@@ -119,7 +120,7 @@ steps:
     commands:
       - sleep 1
       - touch integrationtestsuite2b_report
-      - cp Fail Fail
+
 
   - name: GatherIntegrationTestSuiteReports
     image: ubuntu
