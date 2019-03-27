@@ -9,6 +9,7 @@ steps:
       - name: reports
         path: /var/local/dronetests/reports
     commands:
+      - sleep 10
       - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}
       - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/drone_report
 
@@ -16,6 +17,7 @@ steps:
     image: ubuntu
     depends_on: [ PrepareReports ]
     commands:
+      - sleep 10
       - touch apt_report
       - touch cmake_report
       - touch make_report
