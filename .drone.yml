@@ -89,7 +89,7 @@ steps:
     commands:
       - sleep 1
       - touch prepareintegrationtestsuite1_report
-      - cp Fail Fail
+      # - cp Fail Fail
 
   - name: IntegrationTestSuite1A
     image: ubuntu
@@ -99,7 +99,7 @@ steps:
     commands:
       - sleep 1
       - touch integrationtestsuite1a_report
-      - cp Fail Fail
+      # - cp Fail Fail
 
   - name: IntegrationTestSuite1B
     image: ubuntu
@@ -109,7 +109,7 @@ steps:
     commands:
       - sleep 1
       - touch integrationtestsuite1b_report
-      - cp Fail Fail
+      # - cp Fail Fail
 
   - name: PrepareIntegrationTestSuite2
     image: ubuntu
@@ -117,7 +117,7 @@ steps:
     commands:
       - sleep 10
       - touch prepareintegrationtestsuite2_report
-      - cp Fail Fail
+      # - cp Fail Fail
 
   - name: IntegrationTestSuite2A
     image: ubuntu
