@@ -21,6 +21,7 @@ steps:
       - echo $${RACK_ENV2}
       - export RACK_ENV3="development3"
       - echo $RACK_ENV3
+      - echo "${RACK_ENV3}"
       - sleep 1
       - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}
       - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/drone_report
