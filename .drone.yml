@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-name: LinuxAmd64
+name: LinuxTcp
 
 platform:
   os: linux
@@ -168,11 +168,12 @@ volumes:
 
 ---
 kind: pipeline
-name: LinuxArm64
+name: LinuxUdp
+
 
 platform:
   os: linux
-  arch: arm64
+  arch: amd64
 
 steps:
   - name: PrepareReports
