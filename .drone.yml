@@ -7,11 +7,15 @@ steps:
     depends_on: [ clone ]
     environment:
       RACK_ENV: development
+      RACK_ENV1: 'development1'
+      RACK_ENV2: "development2"
     volumes:
       - name: reports
         path: /var/local/dronetests/reports
     commands:
       - echo ${RACK_ENV}
+      - echo ${RACK_ENV1}
+      - echo ${RACK_ENV2}
       - sleep 1
       - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}
       - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/drone_report
