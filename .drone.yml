@@ -2,14 +2,16 @@ kind: pipeline
 name: default
 
 steps:
-
   - name: PrepareReports
     image: ubuntu
     depends_on: [ clone ]
+    environment:
+      - SOME_KEY="somevalue"
     volumes:
       - name: reports
         path: /var/local/dronetests/reports
     commands:
+      - echo ${SOME_KEY}
       - sleep 1
       - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}
       - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/drone_report
