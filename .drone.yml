@@ -6,12 +6,12 @@ steps:
     image: ubuntu
     depends_on: [ clone ]
     environment:
-      - SOME_KEY=somevalue
+      - RACK_ENV=development
     volumes:
       - name: reports
         path: /var/local/dronetests/reports
     commands:
-      - echo ${SOME_KEY}
+      - echo ${RACK_ENV}
       - sleep 1
       - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}
       - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/drone_report
