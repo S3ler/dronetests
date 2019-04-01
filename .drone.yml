@@ -165,3 +165,172 @@ volumes:
   - name: reports
     host:
       path: /var/local/dronetests/reports
+
+---
+kind: pipeline
+name: LinuxArm64
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+  - name: PrepareReports
+    image: ubuntu
+    depends_on: [ clone ]
+    environment:
+      RACK_ENV: development
+      RACK_ENV1: 'development1'
+      RACK_ENV2: "development2"
+    volumes:
+      - name: reports
+        path: /var/local/dronetests/reports
+    commands:
+      - echo ${RACK_ENV}
+      - echo ${RACK_ENV1}
+      - echo ${RACK_ENV2}
+      - echo $${RACK_ENV}
+      - echo $${RACK_ENV1}
+      - echo $${RACK_ENV2}
+      - export RACK_ENV3="development3"
+      - echo $RACK_ENV3
+      - echo "${RACK_ENV3}"
+      - sleep 1
+      - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}
+      - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/drone_report
+
+  - name: Build
+    image: ubuntu
+    depends_on: [ PrepareReports ]
+    commands:
+      - sleep 1
+      - touch apt_report
+      - touch cmake_report
+      - touch make_report
+      - touch unittestsuite1executable
+      - touch unittestsuite2executable
+      - touch integrationtestsuite1aexecutable
+      - touch integrationtestsuite1bexecutable
+      - touch integrationtestsuite2aexecutable
+      - touch integrationtestsuite2bexecutable
+
+  - name: GatherBuildReports
+    image: ubuntu
+    depends_on: [ Build ]
+    when:
+      status: [ success, failure ]
+    volumes:
+      - name: reports
+        path: /var/local/dronetests/reports
+    commands:
+      - ls -l
+      - cp apt_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/apt_report
+      - cp cmake_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/cmake_report
+      - cp make_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/make_report
+
+  - name: UnitTestSuite1
+    image: ubuntu
+    depends_on: [ Build ]
+    commands:
+      - sleep 1
+      - touch unittestsuite1_report
+
+  - name: UnitTestSuite2
+    image: ubuntu
+    depends_on: [ Build ]
+    commands:
+      - sleep 1
+      - touch unittestsuite2_report
+
+  - name: GatherUnitTestSuiteReports
+    image: ubuntu
+    when:
+      status: [ success, failure ]
+    depends_on: [ UnitTestSuite1, UnitTestSuite2 ]
+    volumes:
+      - name: reports
+        path: /var/local/dronetests/reports
+    commands:
+      - ls -l
+      - cp unittestsuite1_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/unittestsuite1_report
+      - cp unittestsuite2_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/unittestsuite2_report
+
+  - name: PrepareIntegrationTestSuite1
+    image: ubuntu
+    depends_on: [ UnitTestSuite1, UnitTestSuite2 ]
+    commands:
+      - sleep 1
+      - touch prepareintegrationtestsuite1_report
+      # - cp Fail Fail
+
+  - name: IntegrationTestSuite1A
+    image: ubuntu
+    when:
+      status: [ success, failure ]
+    depends_on: [ PrepareIntegrationTestSuite1 ]
+    commands:
+      - sleep 1
+      - touch integrationtestsuite1a_report
+      # - cp Fail Fail
+
+  - name: IntegrationTestSuite1B
+    image: ubuntu
+    when:
+      status: [ success, failure ]
+    depends_on: [ PrepareIntegrationTestSuite1 ]
+    commands:
+      - sleep 1
+      - touch integrationtestsuite1b_report
+      # - cp Fail Fail
+
+  - name: PrepareIntegrationTestSuite2
+    image: ubuntu
+    depends_on: [ UnitTestSuite1, UnitTestSuite2 ]
+    commands:
+      - sleep 10
+      - touch prepareintegrationtestsuite2_report
+      # - cp Fail Fail
+
+  - name: IntegrationTestSuite2A
+    image: ubuntu
+    when:
+      status: [ success, failure ]
+    depends_on: [ PrepareIntegrationTestSuite2 ]
+    commands:
+      - sleep 1
+      - touch integrationtestsuite2a_report
+
+
+  - name: IntegrationTestSuite2B
+    image: ubuntu
+    when:
+      status: [ success, failure ]
+    depends_on: [ PrepareIntegrationTestSuite2 ]
+    commands:
+      - sleep 1
+      - touch integrationtestsuite2b_report
+
+
+  - name: GatherIntegrationTestSuiteReports
+    image: ubuntu
+    when:
+      status: [ success, failure ]
+    depends_on: [ PrepareIntegrationTestSuite1, PrepareIntegrationTestSuite2, IntegrationTestSuite1A, IntegrationTestSuite1B, IntegrationTestSuite2A, IntegrationTestSuite2B ]
+    volumes:
+      - name: reports
+        path: /var/local/dronetests/reports
+    commands:
+      - ls -l
+      - cp prepareintegrationtestsuite1_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/prepareintegrationtestsuite1_report
+      - cp integrationtestsuite1a_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/integrationtestsuite1a_report
+      - cp integrationtestsuite1b_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/integrationtestsuite1b_report
+      - cp prepareintegrationtestsuite2_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/prepareintegrationtestsuite2_report
+      - cp integrationtestsuite2a_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/integrationtestsuite2a_report
+      - cp integrationtestsuite2b_report /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/integrationtestsuite2b_report
+
+
+volumes:
+  - name: reports
+    host:
+      path: /var/local/dronetests/reports
+
