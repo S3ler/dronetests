@@ -6,7 +6,7 @@ steps:
     image: ubuntu
     depends_on: [ clone ]
     environment:
-      - SOME_KEY="somevalue"
+      - SOME_KEY=somevalue
     volumes:
       - name: reports
         path: /var/local/dronetests/reports
