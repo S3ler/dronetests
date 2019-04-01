@@ -1,5 +1,6 @@
+---
 kind: pipeline
-name: default
+name: LinuxAmd64
 
 steps:
   - name: PrepareReports
