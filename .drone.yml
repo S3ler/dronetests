@@ -2,6 +2,10 @@
 kind: pipeline
 name: LinuxAmd64
 
+platform:
+  os: linux
+  arch: amd64
+
 steps:
   - name: PrepareReports
     image: ubuntu
