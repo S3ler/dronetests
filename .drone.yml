@@ -2,8 +2,6 @@ kind: pipeline
 name: default
 
 steps:
-  environment:
-    - A=${DRONE_BUILD_CREATED}
 
   - name: PrepareReports
     image: ubuntu
@@ -15,6 +13,8 @@ steps:
       - sleep 1
       - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}
       - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/drone_report
+      environment:
+        - A=${DRONE_BUILD_CREATED}
 
   - name: Build
     image: ubuntu
