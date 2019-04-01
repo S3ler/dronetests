@@ -18,6 +18,7 @@ steps:
       - name: reports
         path: /var/local/dronetests/reports
     commands:
+      - echo $RACK_ENV
       - echo $(RACK_ENV)
       - echo $(RACK_ENV1)
       - echo $(RACK_ENV2)
