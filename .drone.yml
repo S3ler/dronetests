@@ -16,6 +16,9 @@ steps:
       - echo ${RACK_ENV}
       - echo ${RACK_ENV1}
       - echo ${RACK_ENV2}
+      - echo $${RACK_ENV}
+      - echo $${RACK_ENV1}
+      - echo $${RACK_ENV2}
       - sleep 1
       - mkdir --parents /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}
       - echo "DRONE_BUILD_CREATED ${DRONE_BUILD_CREATED}" > /var/local/dronetests/reports/${DRONE_REPO}/${DRONE_BUILD_NUMBER}/${DRONE_RUNNER_PLATFORM}/drone_report
